@@ -1,78 +1,242 @@
-\documentclass[11pt,a4paper]{moderncv}
+%-----------------------------------------------------------------------------------------------------------------------------------------------%
+%	The MIT License (MIT)
+%
+%	Copyright (c) 2021 Jitin Nair
+%
+%	Permission is hereby granted, free of charge, to any person obtaining a copy
+%	of this software and associated documentation files (the "Software"), to deal
+%	in the Software without restriction, including without limitation the rights
+%	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+%	copies of the Software, and to permit persons to whom the Software is
+%	furnished to do so, subject to the following conditions:
+%	
+%	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+%	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+%	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+%	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+%	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+%	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+%	THE SOFTWARE.
+%	
+%
+%-----------------------------------------------------------------------------------------------------------------------------------------------%
 
-% moderncv themes
-\moderncvtheme[black]{casual}                  % optional argument are 'blue' (default), 'orange', 'green', 'red', 'purple', 'grey' and 'roman' (for roman fonts, instead of sans serif fonts)
-%\moderncvtheme[green]{classic}                % idem
+%----------------------------------------------------------------------------------------
+%	DOCUMENT DEFINITION
+%----------------------------------------------------------------------------------------
 
-% character encoding
-\usepackage[utf8]{inputenc}                   % replace by the encoding you are using
+% article class because we want to fully customize the page and not use a cv template
+\documentclass[a4paper,12pt]{article}
 
-% adjust the page margins
-\usepackage[scale=0.8]{geometry}
-%\setlength{\hintscolumnwidth}{3cm}						% if you want to change the width of the column with the dates
-%\AtBeginDocument{\setlength{\maketitlenamewidth}{6cm}}  % only for the classic theme, if you want to change the width of your name placeholder (to leave more space for your address details
-%\AtBeginDocument{\recomputelengths}                     % required when changes are made to page layout lengths
+%----------------------------------------------------------------------------------------
+%	FONT
+%----------------------------------------------------------------------------------------
 
-% Hyperlinks
-%\usepackage{hyperref}								% to use hyperlinks
-%\definecolor{linkcolour}{rgb}{0,0.2,0.6}			% hyperlinks setup
-%\hypersetup{colorlinks,breaklinks,urlcolor=linkcolour, linkcolor=linkcolour}
+% % fontspec allows you to use TTF/OTF fonts directly
+% \usepackage{fontspec}
+% \defaultfontfeatures{Ligatures=TeX}
 
-% personal data
-\firstname{Donald}
-\familyname{Huang}
-%\title{Resumé title (optional)}               % optional, remove the line if not wanted
-\address{1080 Sutter St Apt 603}{San Francisco, CA 94109}    % optional, remove the line if not wanted
-%\mobile{+30 698 4385057}                    % optional, remove the line if not wanted
-\phone{412-641-9102}                      % optional, remove the line if not wanted
-%\fax{fax (optional)}                          % optional, remove the line if not wanted
-\email{don.hcd@gmail.com}                      % optional, remove the line if not wanted
-%\email{\href{mailto:s.dakourou@gmail.com}{s.dakourou@gmail.com}}                      % optional, remove the line if not wanted
-%\homepage{\href{http://gr.linkedin.com/pub/stefania-dakourou/41/21a/396}{LinkedIn Profile}}                % optional, remove the line if not wanted
-\extrainfo{\href{http://github.com/donhcd}{github.com/donhcd}} % optional, remove the line if not wanted
-%\photo[64pt][0.4pt]{picture}                         % '64pt' is the height the picture must be resized to, 0.4pt is the thickness of the frame around it (put it to 0pt for no frame) and 'picture' is the name of the picture file; optional, remove the line if not wanted
-%\quote{Some quote (optional)}                 % optional, remove the line if not wanted
+% % modified for ShareLaTeX use
+% \setmainfont[
+% SmallCapsFont = Fontin-SmallCaps.otf,
+% BoldFont = Fontin-Bold.otf,
+% ItalicFont = Fontin-Italic.otf
+% ]
+% {Fontin.otf}
 
-% to show numerical labels in the bibliography; only useful if you make citations in your resume
-\makeatletter
-\renewcommand*{\bibliographyitemlabel}{\@biblabel{\arabic{enumiv}}}
-\makeatother
+%----------------------------------------------------------------------------------------
+%	PACKAGES
+%----------------------------------------------------------------------------------------
+\usepackage{url}
+\usepackage{parskip} 	
 
-% bibliography with mutiple entries
-%\usepackage{multibib}
-%\newcites{book,misc}{{Books},{Others}}
+%other packages for formatting
+\RequirePackage{color}
+\RequirePackage{graphicx}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage[scale=0.9,top=0.5in,bottom=0.4in,left=0.45in,right=0.45in]{geometry}
 
-%\nopagenumbers{}                             % uncomment to suppress automatic page numbering for CVs longer than one page
-%----------------------------------------------------------------------------------
-%            content
-%----------------------------------------------------------------------------------
+%tabularx environment
+\usepackage{tabularx}
+
+%for lists within experience section
+\usepackage{enumitem}
+
+% centered version of 'X' col. type
+\newcolumntype{C}{>{\centering\arraybackslash}X} 
+
+%to prevent spillover of tabular into next pages
+\usepackage{supertabular}
+\usepackage{tabularx}
+\newlength{\fullcollw}
+\setlength{\fullcollw}{0.47\textwidth}
+
+%custom \section
+\usepackage{titlesec}				
+\usepackage{multicol}
+\usepackage{multirow}
+
+%CV Sections inspired by: 
+%http://stefano.italians.nl/archives/26
+\titleformat{\section}{\Large\scshape\raggedright}{}{0em}{}[\titlerule]
+\titlespacing{\section}{0pt}{0pt}{10pt}
+
+%for publications
+\usepackage[style=authoryear,sorting=ynt, maxbibnames=2]{biblatex}
+
+%Setup hyperref package, and colours for links
+\usepackage[unicode, draft=false]{hyperref}
+\definecolor{linkcolour}{rgb}{0,0.2,0.6}
+\hypersetup{colorlinks,breaklinks,urlcolor=linkcolour,linkcolor=linkcolour}
+\addbibresource{citations.bib}
+\setlength\bibitemsep{1em}
+
+%for social icons
+\usepackage{fontawesome5}
+
+%debug page outer frames
+%\usepackage{showframe}
+
+
+% job listing environments
+\newenvironment{jobshort}[2]
+    {
+    \begin{tabularx}{\linewidth}{@{}l X r@{}}
+    \textbf{#1} & \hfill &  #2 \\[3.75pt]
+    \end{tabularx}
+    }
+    {
+    }
+
+\newenvironment{joblong}[2]
+    {
+    \begin{tabularx}{\linewidth}{@{}l X r@{}}
+    \textbf{#1} & \hfill &  #2 \\[3.75pt]
+    \end{tabularx}
+    \begin{minipage}[t]{\linewidth}
+    \begin{itemize}[nosep,after=\strut, leftmargin=1em, itemsep=3pt,label=--]
+    }
+    {
+    \end{itemize}
+    \end{minipage}    
+    }
+
+
+
+%----------------------------------------------------------------------------------------
+%	BEGIN DOCUMENT
+%----------------------------------------------------------------------------------------
 \begin{document}
-\maketitle
 
+% non-numbered pages
+\pagestyle{empty} 
+
+%----------------------------------------------------------------------------------------
+%	TITLE
+%----------------------------------------------------------------------------------------
+
+% \begin{tabularx}{\linewidth}{ @{}X X@{} }
+% \huge{Your Name}\vspace{2pt} & \hfill \emoji{incoming-envelope} email@email.com \\
+% \raisebox{-0.05\height}\faGithub\ username \ | \
+% \raisebox{-0.00\height}\faLinkedin\ username \ | \ \raisebox{-0.05\height}\faGlobe \ mysite.com  & \hfill \emoji{calling} number
+% \end{tabularx}
+
+\begin{tabularx}{\linewidth}{@{} C @{}}
+\Huge{Donald Huang} \\[7.5pt]
+\href{https://github.com/donhcd}{\raisebox{-0.05\height}\faGithub\ donhcd} \ $|$ \ 
+\href{https://linkedin.com/in/donaldhuang}{\raisebox{-0.05\height}\faLinkedin\ donaldhuang} \ $|$ \ 
+% \href{https://mysite.com}{\raisebox{-0.05\height}\faGlobe \ mysite.com} \ $|$ \ 
+\href{mailto:don.hcd@gmail.com}{\raisebox{-0.05\height}\faEnvelope \ don.hcd@gmail.com} \ $|$ \ 
+\href{tel:+14126419102}{\raisebox{-0.05\height}\faMobile \ 412.641.9102} \\
+\end{tabularx}
+
+%----------------------------------------------------------------------------------------
+% EXPERIENCE SECTIONS
+%----------------------------------------------------------------------------------------
+
+%Interests/ Keywords/ Summary
+\section{Summary}
+I have designed and built SaaS services from the ground up,
+and then maintained and scaled those systems as both the engineering team and user
+base grew.
+% From this work, many design decisions have led to great outcomes, but
+I've learned the most from passive design decisions that, later down the line,
+plagued the company endlessly. For my next role, I plan to apply my expertise
+to whatever critical problems are at hand, and continue to grow as an engineer
+in all ways possible.
+
+%Experience
 \section{Work Experience}
-\cventry{Oct 2014 - Present}{Software Engineer}{Docker, Inc.}{San Francisco,
-CA}{}{\begin{itemize}\item Worked on the Docker Trusted Registry, Docker's on-premise Docker
-registry solution.\item Designed and implemented the original architecture,
-upgrades, and search and worked on making the Trusted Registry highly available.
-\item Worked with open source to file issues and sometimes fixes.\end{itemize}}
-\cventry{Jan-Sept 2014}{Software Engineer}{Koality Code}{San Francisco, CA}{}{Worked on building an on-premise CI solution in Go. Koality Code was acquired by Docker in October.}
-\cventry{2013}{Software Engineer}{Gumroad}{San Francisco, CA}{}{Worked on both backend and frontend in building a new gifting feature and a new API}
-\cventry{2012}{15-213 Teaching Assistant}{Carnegie Mellon University}{Pittsburgh, PA}{}{Introduction to Computer Systems: an introduction to C and systems programming.}
-\cventry{2012}{Software Engineer Intern}{Facebook}{Menlo Park, CA}{}{Worked on voice messaging in the Android client for Facebook Messenger.}
+\begin{joblong}{Sigma Computing, Inc. -- Software engineer}{Jun 2016 - Present}
+  \item Foundation: Wrote much of the initial application server and
+  feature set, also contributing across the stack significantly in all
+  codebases. Key features/functionality built include user authentication,
+  users and teams, permissions, document filesystem, a task scheduling system
+  for exports and other tasks
+  \item Enterprise features: designed and built SAML login, OAuth integration
+  with warehouses, embedding, and version tagging
+  \item Incident response and mitigation: I was critical in triaging,
+  understanding, and addressing countless incidents. I also worked to ensure
+  that the correct monitoring was in place to alert engineers of incidents as
+  they arose, while avoiding false positives and alert fatigue
+  \item Reliability and noisy neighbor problems: worked to ensure the service
+  could handle higher RPS/DAU as customers scaled up.
+  Worked on problems related to MySQL, NodeJS, and microservices
+\end{joblong}
+\begin{joblong}{Docker, Inc. -- Software engineer}{Oct 2014 - May 2016}
+  \item Worked on the Docker Trusted Registry, Docker's on-premise Docker
+  registry solution.
+  \item Designed and implemented the original architecture, upgrades, and
+  search and worked on making the Trusted Registry highly available
+\end{joblong}
+\begin{jobshort}{Koality Code -- Software engineer}{Jan-Sept 2014}
+-- Worked on building an on-premise CI solution in Go. Koality Code was acquired by Docker
+\end{jobshort}
 
-\section{Relevant Coursework}
-\cventry{Spring 2012}{15-410 Operating System Design and Implementation}{}{}{}{Worked with a partner to write a threading library implementing \texttt{thr\_create()}, \texttt{thr\_join()}, and \texttt{thr\_exit()}, along with mutexes, condition variables, and semaphores, in C.\\Wrote a robust stack trace printer in C.}
+\begin{jobshort}{Gumroad -- Software engineer intern}{Summer 2013}
+-- Built the gifting feature end-to-end
+\end{jobshort}
 
-\section{Past Projects}
-\cventry{Spring 2013}{popkorn.me (Now defunct)}{PennApps}{}{}{Worked with 3 other students to create a collaborative Youtube video viewer.}
-\cventry{Spring 2013}{scheduleplus.org}{}{}{}{A site where students can see what courses their classmates are taking. Built the ``heatmap'' feature where users can view many people's schedules simultaneously in order to choose optimal meeting times}
+\begin{jobshort}{Facebook -- Software engineer Intern}{Summer 2012}
+-- Built an audio snippet messaging feature in the Android Facebook Messenger client
+\end{jobshort}
+%Projects
+\section{Coursework}
 
-\section{Skills}
-\cvline{Programming Languages}{Golang, C, Java/Android, Haskell, Javascript, Python, Rails, Standard ML, Clojure}
-\cvline{Software}{GNU utils, vim, git, bash, Intellij}
+\begin{tabularx}{\linewidth}{ @{}l r@{} }
+% \textbf{Penn Apps hackathon -- popkorn.me} & \hfill Spring 2013 \\[3.75pt]
+% \multicolumn{2}{@{}X@{}}{
+%   Created a collaborative Youtube video viewer with 3 other students
+% }  \\
+\textbf{15-410 Operating System Design and Implementation} & \hfill Spring 2012 \\[3.75pt]
+\multicolumn{2}{@{}X@{}}{
+    -- Wrote a threading library implementing \texttt{thr\_create()},
+    \texttt{thr\_join()}, and \texttt{thr\_exit()}, along with mutexes,
+    condition variables, and semaphores, in C with a partner. }  \\
+% \multicolumn{2}{@{}X@{}}{
+%     -- Wrote a robust stack trace printer in C. }  \\
+\end{tabularx}
 
+%----------------------------------------------------------------------------------------
+%	EDUCATION
+%----------------------------------------------------------------------------------------
 \section{Education}
-%\cventry{year--year}{Degree}{Institution}{City}{\textit{Grade}}{Description}
-\cventry{2014}{Bachelors in Computer Science}{Carnegie Mellon University}{Pittsburgh, PA}{}{}
+\begin{tabularx}{\linewidth}{@{}l X@{}}	
+2010 - 2014 & Bachelors in Computer Science at \textbf{Carnegie Mellon University}
+\hfill \normalsize \\
+\end{tabularx}
+
+%----------------------------------------------------------------------------------------
+%	SKILLS
+%----------------------------------------------------------------------------------------
+\section{Skills}
+\begin{tabularx}{\linewidth}{@{}l X@{}}
+Languages &  \normalsize{Typescript, NodeJS, Golang, Rust, C, Java/Android, Haskell, Javascript, Python, Rails, Standard ML, Clojure}\\
+Technologies  &  \normalsize{MySQL, compilers, kubernetes, Snowflake, GNU utils, vim, QMK, git, shell scripting}\\  
+Other interests  &  \normalsize{Rock climbing: bouldered up to v10-11, the Russian language, piano}\\  
+\end{tabularx}
+
+\vfill
+\center{\footnotesize Last updated: \today}
 
 \end{document}

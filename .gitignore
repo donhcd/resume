@@ -1,6 +1,9 @@
 .DS_Store
 *.aux
 *.bbl
+*.bcf
+*.fls
+*.run.xml
 *.blg
 *.dvi
 *.fdb_latexmk

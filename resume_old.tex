@@ -1,0 +1,116 @@
+\documentclass[11pt,a4paper]{moderncv}
+
+% moderncv themes
+\moderncvtheme[black]{casual}                  % optional argument are 'blue' (default), 'orange', 'green', 'red', 'purple', 'grey' and 'roman' (for roman fonts, instead of sans serif fonts)
+%\moderncvtheme[green]{classic}                % idem
+
+% character encoding
+\usepackage[utf8]{inputenc}                   % replace by the encoding you are using
+
+% adjust the page margins
+\usepackage[scale=0.8]{geometry}
+%\setlength{\hintscolumnwidth}{3cm}						% if you want to change the width of the column with the dates
+%\AtBeginDocument{\setlength{\maketitlenamewidth}{6cm}}  % only for the classic theme, if you want to change the width of your name placeholder (to leave more space for your address details
+%\AtBeginDocument{\recomputelengths}                     % required when changes are made to page layout lengths
+
+% Hyperlinks
+%\usepackage{hyperref}								% to use hyperlinks
+%\definecolor{linkcolour}{rgb}{0,0.2,0.6}			% hyperlinks setup
+%\hypersetup{colorlinks,breaklinks,urlcolor=linkcolour, linkcolor=linkcolour}
+
+% personal data
+\firstname{Donald}
+\familyname{Huang}
+%\title{Resumé title (optional)}               % optional, remove the line if not wanted
+\address{}{New York, NY}    % optional, remove the line if not wanted
+%\mobile{+30 698 4385057}                    % optional, remove the line if not wanted
+\phone{412-641-9102}                      % optional, remove the line if not wanted
+%\fax{fax (optional)}                          % optional, remove the line if not wanted
+\email{don.hcd@gmail.com}                      % optional, remove the line if not wanted
+%\email{\href{mailto:s.dakourou@gmail.com}{s.dakourou@gmail.com}}                      % optional, remove the line if not wanted
+%\homepage{\href{http://gr.linkedin.com/pub/stefania-dakourou/41/21a/396}{LinkedIn Profile}}                % optional, remove the line if not wanted
+\extrainfo{\href{http://github.com/donhcd}{github.com/donhcd}} % optional, remove the line if not wanted
+%\photo[64pt][0.4pt]{picture}                         % '64pt' is the height the picture must be resized to, 0.4pt is the thickness of the frame around it (put it to 0pt for no frame) and 'picture' is the name of the picture file; optional, remove the line if not wanted
+%\quote{Some quote (optional)}                 % optional, remove the line if not wanted
+
+% to show numerical labels in the bibliography; only useful if you make citations in your resume
+\makeatletter
+\renewcommand*{\bibliographyitemlabel}{\@biblabel{\arabic{enumiv}}}
+\makeatother
+
+% bibliography with mutiple entries
+%\usepackage{multibib}
+%\newcites{book,misc}{{Books},{Others}}
+
+%\nopagenumbers{}                             % uncomment to suppress automatic page numbering for CVs longer than one page
+%----------------------------------------------------------------------------------
+%            content
+%----------------------------------------------------------------------------------
+\begin{document}
+\maketitle
+I have designed and built SaaS services from the ground up,
+and then maintained and scaled those systems as both the engineering team and user
+base grew.
+% From this work, many design decisions have led to great outcomes, but
+I've learned the most from passive design decisions that plagued the company endlessly. 
+For my next role, I plan to apply my expertise to whatever critical
+problems are at hand, and continue to grow as an engineer in all ways possible.
+\section{Work Experience}
+\cventry{Jun 2016 - Present}{Sigma Computing, Inc.}{Software Engineer}{SF,
+CA / NYC, New York}{}{ \begin{itemize}
+  \item Initial Foundation: Wrote much of the initial application server and feature
+    set, also contributing across the stack significantly in all codebases. Key
+    features/functionality built include user authentication, users and teams,
+    permissions, document filesystem, a task scheduling system for exports and
+    other tasks
+  \item Enterprise features: designed and built SAML login, OAuth integration
+    with warehouses, embedding, and version tagging
+  \item Incident response and mitigation: I was critical in triaging,
+    understanding, and addressing countless incidents. I also worked to ensure
+    that the correct monitoring was in place to alert engineers of incidents as
+    they arose, while avoiding false positives and alert fatigue
+  \item Reliability and noisy neighbor problems: I worked to ensure the service
+    could handle increasingly higher RPS/DAU as customers scaled up.
+    Specifically, worked on problems related to MySQL, NodeJS, and
+    microservices
+\end{itemize}}
+\cventry{Oct 2014 - May 2016}{Docker, Inc.}{Software Engineer}{San Francisco,
+CA}{}{\begin{itemize}
+  \item Worked on the Docker Trusted Registry, Docker's on-premise Docker
+registry solution.\item Designed and implemented the original architecture,
+upgrades, and search and worked on making the Trusted Registry highly available
+\end{itemize}}
+\cventry{Jan-Sept 2014}{Koality Code}{Software Engineer}{San Francisco, CA}{}{
+  \begin{itemize}
+  \item Worked on building an on-premise CI solution in Go. Koality Code was acquired by Docker
+  \end{itemize}}
+\cventry{2013}{Gumroad}{Software Engineer Intern}{San Francisco, CA}{}{
+  \begin{itemize}
+    \item Built the gifting feature end-to-end
+  \end{itemize}}
+\cventry{2012}{Facebook}{Software Engineer Intern}{Menlo Park, CA}{}{
+  \begin{itemize}
+  \item Built an audio snippet messaging feature in the Android Facebook Messenger client
+  \end{itemize}}
+
+\section{Relevant Coursework}
+\cventry{Spring 2012}{15-410 Operating System Design and Implementation}{}{}{}{Worked with a partner to write a threading library implementing \texttt{thr\_create()}, \texttt{thr\_join()}, and \texttt{thr\_exit()}, along with mutexes, condition variables, and semaphores, in C.\\Wrote a robust stack trace printer in C.}
+
+\section{Past Projects}
+\cventry{Spring 2013}{popkorn.me (Now defunct)}{PennApps Hackathon}{}{}{
+  Created a collaborative Youtube video viewer with 3 other students
+  }
+\cventry{Spring 2013}{scheduleplus.org}{}{}{}{
+  Built the heatmap feature where users can view many people's schedules simultaneously in order to choose optimal meeting times
+  }
+
+\section{Skills}
+\cvline{Programming Languages}{Typescript, NodeJS, Golang, Rust, C, Java/Android, Haskell, Javascript, Python, Rails, Standard ML, Clojure}
+\cvline{Technologies}{MySQL, compilers, kubernetes, Snowflake, GNU utils, vim, QMK, git, shell scripting}
+\cvline{Other interests}{Rock climbing: bouldered up to v10-11, Russian language, piano}
+
+\section{Education}
+%\cventry{year--year}{Degree}{Institution}{City}{\textit{Grade}}{Description}
+\cventry{2010 - 2014}{Bachelors in Computer Science}{Carnegie Mellon University}{Pittsburgh, PA}{}{}
+
+\end{document}
